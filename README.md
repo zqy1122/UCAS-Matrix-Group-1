@@ -61,9 +61,13 @@ $$
 
 ## 效果概览
 
-| [封面效果图]([https://github.com/jweihe/UCAS_Latex_Template/blob/main/figures/ucas_report.png](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/cover.png)) | [目录效果图]([https://github.com/jweihe/UCAS_Latex_Template/blob/main/figures/index.png](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/index.png)) |
+| [封面效果图](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/cover.png) | [目录效果图](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/index.png) |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                ![Résumé](./images/cover.png)                 |                ![Résumé](./images/index.png)                 |
+
+| [正文效果图](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/mian.png) | [特殊环境效果图](https://github.com/neverwinHao/UCAS-Matrix-Template/blob/main/images/special.png) |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                 ![Résumé](./images/main.png)                 |               ![Résumé](./images/special.png)                |
 
 ## 参考
 
