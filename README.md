@@ -117,7 +117,7 @@ $$
 
 1. **Fork 并克隆仓库**
    ```bash
-   git clone https://github.com/<你的用户名>/UCAS-Matrix-Template.git
+   git clone https://github.com/neverwinHao/UCAS-Matrix-Template.git
    cd UCAS-Matrix-Template
 
 2. **创建分支并修改**
