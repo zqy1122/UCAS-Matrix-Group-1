@@ -103,11 +103,17 @@
 \theoremstyle{mytheoremstyle}
 \newtheorem{example}{例}[subsection]
 \newtheorem{exercise}{练习}[subsection]
+% \mdfdefinestyle{mybox}{
+%     backgroundcolor=black!5, innertopmargin=1.5em, innerbottommargin=1em,
+%     innerleftmargin=10pt, innerrightmargin=10pt, topline=true, bottomline=false,
+%     leftline=false, rightline=false, linewidth=2pt, linecolor=red,
+%     splittopskip=\topsep,
+% }
 \mdfdefinestyle{mybox}{
-    backgroundcolor=black!5, innertopmargin=1.5em, innerbottommargin=1em,
-    innerleftmargin=10pt, innerrightmargin=10pt, topline=true, bottomline=false,
-    leftline=false, rightline=false, linewidth=2pt, linecolor=red,
-    splittopskip=\topsep,
+    backgroundcolor=black!5,
+    innertopmargin=1.5em, innerbottommargin=1em,
+    innerleftmargin=10pt, innerrightmargin=10pt,
+    linewidth=0.5pt, linecolor=gray!50,
 }
 \surroundwithmdframed[style=mybox]{example}
 \surroundwithmdframed[style=mybox]{exercise}
