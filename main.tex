@@ -14,195 +14,22 @@
 
 % --- 正文开始 ---
 
-\section{一级标题 (Section)}
-这是一级标题，代表文档中最大、最重要的部分，例如书本中的“章”。段落内容直接写在这里即可。段落与段落之间会自动添加垂直间距。
+\section{矩阵与线性方程组}
 
-\subsection{二级标题 (Subsection)}
-这是二级标题，用于组织一级标题内部的各个小节。
+\include{section1/1}
+\include{section1/2}
+\include{section1/3}
+\include{section1/4}
+\include{section1/5}
+\include{section1/6}
 
-\subsubsection{三级标题 (Subsubsection)}
-这是三级标题，用于更细致地划分内容。这是模板支持的最低级别的自动编号标题。
+\section{矩阵系统与阶梯形}
 
-\section{模板功能演示}
-本节将展示此模板中预设的各种排版元素的使用方法。
+\include{section2/1}
+\include{section2/2}
+\include{section2/3}
+\include{section2/4}
+\include{section2/5}
+\include{section2/6}
 
-\section{线性代数公式示例}
-本节展示了在线性代数类论文或教材中常用的公式书写方式，可作为插入数学表达的参考。
-
-\subsection{基本符号与矩阵表示}
-一个 $m\times n$ 的矩阵通常记为
-\[
-\mathbf{A} = 
-\begin{bmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{m1} & a_{m2} & \cdots & a_{mn}
-\end{bmatrix}.
-\]
-列向量和行向量分别表示为
-\[
-\mathbf{x} = 
-\begin{bmatrix}
-x_1 \\ x_2 \\ \vdots \\ x_n
-\end{bmatrix},
-\quad
-\mathbf{x}^\mathsf{T} = [x_1, x_2, \dots, x_n].
-\]
-
-\subsection{矩阵运算}
-矩阵的加法与数乘满足：
-\[
-\mathbf{A} + \mathbf{B} = (a_{ij} + b_{ij}), \qquad
-c\mathbf{A} = (c a_{ij}).
-\]
-矩阵乘法定义为：
-\[
-(\mathbf{A}\mathbf{B})_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}.
-\]
-矩阵转置、逆矩阵与迹的常见表示：
-\[
-\mathbf{A}^\mathsf{T}, \quad \mathbf{A}^{-1}, \quad \mathrm{tr}(\mathbf{A}) = \sum_{i} a_{ii}.
-\]
-
-\subsection{行列式与性质}
-二维和三维矩阵的行列式分别为：
-\[
-\det
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-= ad - bc,
-\]
-\[
-\det
-\begin{pmatrix}
-a & b & c\\
-d & e & f\\
-g & h & i
-\end{pmatrix}
-= aei + bfg + cdh - ceg - bdi - afh.
-\]
-
-行列式的性质：
-\[
-\det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B}), \qquad
-\det(\mathbf{A}^\mathsf{T}) = \det(\mathbf{A}).
-\]
-
-\subsection{特征值与特征向量}
-如果 $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$，则 $\lambda$ 称为 $\mathbf{A}$ 的特征值，$\mathbf{x}$ 为对应的特征向量。  
-特征方程为：
-\[
-\det(\mathbf{A} - \lambda \mathbf{I}) = 0.
-\]
-
-\subsection{正交与投影}
-向量 $\mathbf{u}, \mathbf{v}$ 正交当且仅当：
-\[
-\mathbf{u}^\mathsf{T} \mathbf{v} = 0.
-\]
-$\mathbf{v}$ 在 $\mathbf{u}$ 上的投影为：
-\[
-\mathrm{proj}_{\mathbf{u}}(\mathbf{v}) = 
-\frac{\mathbf{u}^\mathsf{T}\mathbf{v}}{\mathbf{u}^\mathsf{T}\mathbf{u}} \mathbf{u}.
-\]
-
-\subsection{奇异值分解 (SVD)}
-任意实矩阵 $\mathbf{A}\in\mathbb{R}^{m\times n}$ 可分解为：
-\[
-\mathbf{A} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^\mathsf{T},
-\]
-其中 $\mathbf{U}\in\mathbb{R}^{m\times m}$、$\mathbf{V}\in\mathbb{R}^{n\times n}$ 为正交矩阵，
-$\boldsymbol{\Sigma}$ 为仅含非负元素的对角矩阵：
-\[
-\boldsymbol{\Sigma} =
-\begin{bmatrix}
-\sigma_1 &  &  & 0\\
- & \sigma_2 &  & \\
- &  & \ddots & \\
-0 &  &  & \sigma_r
-\end{bmatrix}.
-\]
-
-\subsection{线性方程组与矩阵形式}
-线性方程组
-\[
-\begin{cases}
-a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1,\\
-a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2,\\
-\vdots \\
-a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
-\end{cases}
-\]
-可简写为矩阵形式：
-\[
-\mathbf{A}\mathbf{x} = \mathbf{b}.
-\]
-若 $\mathbf{A}$ 可逆，则解为：
-\[
-\mathbf{x} = \mathbf{A}^{-1}\mathbf{b}.
-\]
-
-
-\subsection{插入图片}
-UCAS校徽
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width =.4\textwidth]{images/ucas_logo.pdf}
-    \caption{中国科学院大学}
-    \label{UCAS}
-\end{figure}
-
-\subsection{自定义环境演示}
-
-\subsubsection{需要强调的定理}
-\begin{bluebox}{解集合的三种可能性}
-\begin{itemize}[leftmargin=*, labelsep=0.5em, itemsep=0.5em, topsep=0.5em]
-  \item[■] \textbf{唯一解}：存在一组且仅有一组 $x_{i}$ 的值，同时满足所有方程
-  \item[■] \textbf{无解}：不存在一组 $x_{i}$ 的值，同时满足所有方程—解集为空
-  \item[■] \textbf{无限多解}：存在无穷多组不同的 $x_{i}$ 值，同时满足所有方程。很容易证明，如果一个系统有多个解，那么它就有无穷多个解。例如，一个系统不可能有确切的两个不同的解。
-\end{itemize}
-\end{bluebox}
-
-\subsubsection{需要展示的例子}
-% 使用方法：\begin{example}[可选的标题] ... \end{example}
-% 注意：标题在方括号 [] 中
-
-\begin{example}{Gauss-Jordan elimination}
-首先将方程组转换成增广矩阵形式
-$$
-\left\{\begin{array}{r}
-x_{2}-x_{3}=3 \\
--2 x_{1}+4 x_{2}-x_{3}=1 \\
--2 x_{1}+5 x_{2}-4 x_{3}=-2
-\end{array} \Longrightarrow\left(\begin{array}{rrr|r}
-0 & 1 & -1 & 3 \\
--2 & 4 & -1 & 1 \\
--2 & 5 & -4 & -2
-\end{array}\right)\right.
-$$
-由于第一个主元不能为零，所以我们将不得不进行行交换，以将一个非零元素带到主元位置。
-\end{example}
-
-\subsubsection{需要展示的作业题}
-\begin{exercise}{求解线性方程组}
-Use Gaussian elimination with back substitution to solve the following system：
-$$
-\begin{aligned}
-& x_{1}+x_{2}+x_{3}=1, \\
-& x_{1}+2 x_{2}+2 x_{3}=1, \\
-& x_{1}+2 x_{2}+3 x_{3}=1 .
-\end{aligned}
-$$
-\end{exercise}
-
-
-\section{写在最后}
-\subsection{开源地址}
-\begin{itemize}
-    \item Github: \url{https://github.com/neverwinHao/UCAS-Matrix-Template}
-\end{itemize}
 \end{document}
