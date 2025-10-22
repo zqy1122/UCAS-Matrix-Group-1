@@ -1,4 +1,17 @@
 # UCAS-Matrix-Template
+
+## 环境和编译
+
+1. 模板中使用了FandolSong，FandolHei，FandolKai字体，经测试在texlive 2019中编译会报错，建议使用texlive 2025。
+2. 编译命令
+```bash
+latexmk -xelatex main.tex
+```
+or
+```bash
+make clean && make
+```
+
 ## 文档说明
 
 * 国科大矩阵分析大作业模板，此文档或许还较为粗糙，仅供参考，欢迎提交pr来共同维护这个模板！
@@ -137,9 +150,14 @@ git push origin fix-typo
 4. **在 GitHub 上发起 Pull Request**
 
 
+
+
+
 ## 参考
 
 + https://github.com/jweihe/UCAS_Latex_Template
 + [国科大学位论文LaTeX模板](https://github.com/mohuangrui/ucasthesis)
 + [北京大学课程论文模板](https://www.overleaf.com/latex/templates/bei-jing-da-xue-ke-cheng-lun-wen-mo-ban/yntmqcktrzfh)
+
+
 
