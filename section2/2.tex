@@ -1,0 +1,184 @@
+% XeLatex编辑
+\documentclass[10pt, a4paper]{article}
+
+\usepackage{ucas_matrix}
+
+\begin{document}
+
+% \ucascover
+
+% % --- 目录 ---
+% % 会自动生成带“目录”标题的目录页
+% \tableofcontents
+% \newpage
+
+% % --- 正文开始 ---
+
+
+\subsection*{2.2 行简化阶梯形矩阵(REDUCED ROW ECHELON FORM)}
+
+在 2.1 节中，我们引入了行阶梯形的概念。若在高斯-约当消元法的基础上再施加两个额外的条件，我们将得到一种形式更简洁、性质更优良的矩阵，称为\textbf{行简化阶梯形矩阵}。
+
+\subsubsection*{2.2.1行简化阶梯形的定义}
+
+一个 \( m \times n \) 的矩阵 \( E \) 被称为是\textbf{行简化阶梯形}，当且仅当它满足以下三个条件：
+\begin{enumerate}
+    \item \( E \) 是行阶梯形矩阵。
+    \item \textbf{每个主元（即每行第一个非零元素）均为 1}。
+    \item \textbf{每个主元所在的列中，除主元自身外，其他所有元素均为 0}。
+\end{enumerate}
+
+行简化阶梯形矩阵的典型结构如下所示，其中标有 \(*\) 的元素可以是任意数（零或非零）：
+
+\[
+E = \begin{pmatrix}
+1 & * & 0 & 0 & * & * & 0 & * \\
+0 & 0 & 1 & 0 & * & * & 0 & * \\
+0 & 0 & 0 & 1 & * & * & 0 & * \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & * \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\subsubsection*{2.2.2行简化阶梯形的唯一性}
+
+行简化阶梯形一个至关重要的性质是其\textbf{唯一性}。
+\begin{itemize}
+    \item 对于任意矩阵 \( A \)，无论采用何种初等行变换序列将其化简，最终得到的行简化阶梯形矩阵 \( E_A \) 都是\textbf{唯一确定}的。
+    \item 这种唯一性使得 \( E_A \) 在理论分析中非常有用，它可以作为一个"地图"或"密钥"，来揭示原始矩阵 \( A \) 的列向量之间隐藏的线性关系。
+\end{itemize}
+
+\subsubsection*{2.2.3列关系在 \( E_A \) 与 \( A \) 中的体现}
+
+在简化形式 \( E_A \) 中，列向量之间的关系是清晰透明的：
+\begin{itemize}
+    \item 每一个非基本列 \( E_{*k} \) 都可以表示为位于其左侧的基本列 \( E_{*b_1}, E_{*b_2}, \dots, E_{*b_j} \) 的线性组合：
+    \[
+    E_{*k} = \mu_1 E_{*b_1} + \mu_2 E_{*b_2} + \cdots + \mu_j E_{*b_j}
+    \]
+    其中，系数 \( \mu_1, \mu_2, \dots, \mu_j \) 恰好就是向量 \( E_{*k} \) 中的前 \( j \) 个分量。
+    
+    \item \textbf{关键洞察}：存在于 \( E_A \) 的列之间的这种线性依赖关系，与原始矩阵 \( A \) 的列之间的依赖关系\textbf{完全一致}。因此，若在 \( E_A \) 中有：
+    \[
+    E_{*k} = \mu_1 E_{*b_1} + \mu_2 E_{*b_2} + \cdots + \mu_j E_{*b_j}
+    \]
+    那么在 \( A \) 中，必然有：
+    \[
+    A_{*k} = \mu_1 A_{*b_1} + \mu_2 A_{*b_2} + \cdots + \mu_j A_{*b_j}
+    \]
+\end{itemize}
+
+% 红色文字
+\textcolor{red}{例子2.2.1}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}\\
+将矩阵 \( A \) 的每个非基本列表示为基本列的线性组合。
+\[
+A = \begin{pmatrix}
+2 & -4 & -8 & 6 & 3 \\
+0 & 1 & 3 & 2 & 3 \\
+3 & -2 & 0 & 0 & 8
+\end{pmatrix}
+\]
+
+解答:
+通过初等行变换将 \( A \) 化为行简化阶梯形 \( E_A \)：
+\[
+\begin{pmatrix}
+2 & -4 & -8 & 6 & 3 \\
+0 & 1 & 3 & 2 & 3 \\
+3 & -2 & 0 & 0 & 8
+\end{pmatrix}
+\rightarrow \cdots \rightarrow
+\begin{pmatrix}
+1 & 0 & 2 & 0 & 4 \\
+0 & 1 & 3 & 0 & 2 \\
+0 & 0 & 0 & 1 & \frac{1}{2}
+\end{pmatrix} = E_A
+\]
+
+在 \( E_A \) 中，第 1, 2, 4 列是基本列。观察非基本列：
+\begin{itemize}
+    \item \( E_{*3} = 2E_{*1} + 3E_{*2} \)
+    \item \( E_{*5} = 4E_{*1} + 2E_{*2} + \frac{1}{2}E_{*4} \)
+\end{itemize}
+
+因此，在原始矩阵 \( A \) 中，同样的关系成立：
+\begin{itemize}
+    \item \( A_{*3} = 2A_{*1} + 3A_{*2} \)
+    \item \( A_{*5} = 4A_{*1} + 2A_{*2} + \frac{1}{2}A_{*4} \)
+\end{itemize}
+
+可以通过直接计算验证这些等式的正确性。
+
+总结：行简化阶梯形 \( E_A \) 的效用在于它能清晰地揭示出以矩阵列形式存储的数据之间的内在依赖关系，这是普通行阶梯形所不具备的强大理论工具。
+
+% 红色文字
+\textcolor{red}{练习2.2}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+\begin{enumerate}[leftmargin=*, label=\bfseries 2.2.\arabic*]
+
+\item Determine the reduced row echelon form for each of the following matrices and then express each nonbasic column in terms of the basic columns:
+\begin{enumerate}[label=(\alph*)]
+    \item \(\begin{pmatrix}
+        1 & 2 & 3 & 3 \\
+        2 & 4 & 6 & 9 \\
+        2 & 6 & 7 & 6 
+    \end{pmatrix}\)
+    
+    \item \(\begin{pmatrix}
+        2 & 1 & 1 & 3 & 0 & 4 & 1 \\
+        4 & 2 & 4 & 4 & 1 & 5 & 5 \\
+        2 & 1 & 3 & 1 & 0 & 4 & 3 \\
+        6 & 3 & 4 & 8 & 1 & 9 & 5 \\
+        0 & 0 & 3 & -3 & 0 & 0 & 3 \\
+        8 & 4 & 2 & 14 & 1 & 13 & 3 
+    \end{pmatrix}\)
+\end{enumerate}
+
+\item Construct a matrix \( A \) whose reduced row echelon form is
+\[
+E_A = \begin{pmatrix}
+1 & 2 & 0 & -3 & 0 & 0 & 0 \\
+0 & 0 & 1 & -4 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 
+\end{pmatrix}.
+\]
+Is \( A \) unique?
+
+\item Suppose that \( A \) is an \( m \times n \) matrix. Give a short explanation of why \( \text{rank}(A) < n \) whenever one column in \( A \) is a combination of other columns in \( A \).
+
+\item Consider the following matrix:
+\[
+A = \begin{pmatrix}
+.1 & .2 & .3 \\
+.4 & .5 & .6 \\
+.7 & .8 & .901 
+\end{pmatrix}.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Use exact arithmetic to determine \( E_A \).
+    \item Now use 3-digit floating-point arithmetic (without partial pivoting or scaling) to determine \( E_A \) and formulate a statement concerning "near relationships" between the columns of \( A \).
+\end{enumerate}
+
+\item Consider the matrix
+\[
+E = \begin{pmatrix}
+1 & 0 & -1 \\
+0 & 1 & 2 \\
+0 & 0 & 0 
+\end{pmatrix}.
+\]
+You already know that \( E_{*3} \) can be expressed in terms of \( E_{*1} \) and \( E_{*2} \). However, this is not the only way to represent the column dependencies in \( E \). Show how to write \( E_{*1} \) in terms of \( E_{*2} \) and \( E_{*3} \) and then express \( E_{*2} \) as a combination of \( E_{*1} \) and \( E_{*3} \).
+
+\noindent \textbf{Note:} This exercise illustrates that the set of pivotal columns is not the only set that can play the role of "basic columns." Taking the basic columns to be the ones containing the pivots is a matter of convenience because everything becomes automatic that way.
+
+\end{enumerate}
+
+\end{document}
