@@ -1,0 +1,200 @@
+\subsection*{2.3 线性方程组的一致性(Consistency Of Linear Systems)}
+
+如果一个包含 \(n\) 个未知数的 \(m\) 个线性方程组至少有一个解，则称其为相容方程组。如果没有解，则该方程组
+被称为不相容方程组。本节旨在确定给定方程组相容的条件。
+
+对于仅包含两个或三个未知数的方程组，
+说明其相容性条件很容易。两个未知数的线性方程表示二维空间中的一条直线，
+而三个未知数的线性方程表示三维空间中的平面。因此，
+一个包含 \(m\) 个两个未知数的线性方程组相容当且仅当这 \(m\) 个方程定义的 \(m\) 条直线至少有一个公共交点。
+同样，一个包含 \(m\) 个三个未知数的方程组相容当且仅当
+相关的 \(m\) 个平面至少有一个公共交点。
+然而，当 \(m\) 较大时，这些几何条件可能不易直观验证，而当 \(n\) > 3 时，相交线或平面的推广则无法用肉眼直观地看到。
+
+我们不依赖几何来建立一致性，而是使用高斯消元法。如果将相关的增广矩阵 \([A|b]\) 通过行运算简化为行阶梯矩阵 \([E|c]\)，则一致性（或不一致性）变得显而易见。
+假设在将 \([A|b]\) 简化为 \([E|c]\) 的过程中，出现这样一种情况：一行中唯一的非零项出现在右侧，如下所示：
+
+\[
+\mathrm{Row}\_i \rightarrow 
+\left(\begin{array}{cccccc|c}
+* & * & * & * & * & * & * \\ 
+0 & 0 & 0 & * & * & * & * \\ 
+0 & 0 & 0 & 0 & 0 & 0 & \alpha \\
+\bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+\bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+\end{array}\right)
+\leftarrow \alpha \neq 0.
+\]
+
+如果这发生在第 i 行，则相关系统的第 i 个方程为
+
+\[
+0x_1 + 0x_2 + ... + 0x_n = \alpha.
+\]
+
+当 \(\alpha \neq 0\) 时，该方程无解，因此原系统也必然不一致（因为行运算不会改变解集）。
+反之亦然。也就是说，如果一个系统不一致，那么在消元过程中，会出现如下形式的行
+
+\[
+\left(\begin{array}{cccccc|c}
+0 & 0 & ... & 0 & \alpha
+\end{array}\right), \alpha \neq 0.
+\]
+
+否则，回代过程可以完成，并产生一个解。当遇到形式为
+(0 0 ... 0 \(\mid\) 0) 的行时，不会指示不一致性。这只是表示 0 = 0，
+尽管这对于确定任何未知数的值没有任何帮助，但它仍然是一个真实的陈述，
+因此它并不表示系统存在不一致。
+
+还有一些其他方法可以表征系统的一致性（或不一致性）。其中一种方法是：如果增广矩阵 \([A|b]\) 的最后一列 \(b\) 是非基列，则最后一列不可能存在主元，因此系统是一致的，因为 (2.3.1) 的情况不会发生。
+反之，如果系统是一致的，那么 (2.3.1) 的情况在高斯消元法中永远不会发生，因此最后一列不可能是基列。换句话说，\([A|b]\) 是一致的当且仅当 \(b\) 是非基列。
+
+说 b 是 \([A|b]\) 中的非基列，等同于说\([A|b]\) 中的所有基列都位于系数矩阵 A 中。由于矩阵中基列的数量就是秩，因此一致性也可以这样来描述：
+当且仅当 rank\([A|b]\) = rank\((A)\) 时，系统才是一致的。
+
+
+
+\begin{bluebox}{线性方程组的一致性}
+满足以下任意一个条件都可以说 \([A|b]\) 是一致的：
+\begin{itemize}
+    \item 行简化阶梯形矩阵 \([A|b]\) 中不存在形如下列的行:
+    \[
+    \left(\begin{array}{cccc|c}
+        0 & 0 & ... & 0 & \alpha
+    \end{array}\right), \alpha \neq 0
+    \]
+    \item \(b\) 是 \([A|b]\) 中的非基列。
+    \item rank\([A|b]\) = rank\((A)\)
+    \item \(b\) 是 \(A\) 的基列的一个组合。
+\end{itemize}
+\end{bluebox}
+
+% 红色文字
+\textcolor{red}{例子2.3.1}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+\textbf{问题}: 确定以下系统是否一致: 
+\[
+\begin{align} 
+    x_1 + x_2 + 2x_3 + 2x_4 + x_5 = 1, \\
+    2x_1 + 2x_2 + 4x_3 + 4x_4 + 3x_5 = 1, \\
+    2x_1 + 2x_2 + 4x_3 + 4x_4 + 2x_5 = 2, \\
+    3x_1 + 5x_2 + 8x_3 + 6x_4 + 5x_5 = 3.
+\end{align}
+\]
+\textbf{解答}: 对增广矩阵 \([A|b]\) 应用高斯消元法，如下所示
+\[
+\left(\begin{array}{ccccc|c} 
+\circlednum{1} & 1 & 2 & 2 & 1 & 1 \\ 
+2 & 2 & 4 & 4 & 3 & 1 \\ 
+2 & 2 & 4 & 4 & 2 & 2 \\ 
+3 & 5 & 8 & 6 & 5 & 3 
+\end{array}\right)
+\to
+\left(\begin{array} {ccccc|c} 
+\circlednum{1} & 1 & 2 & 2 & 1 & 1 \\ 
+0 & \circlednum{0} & 0 & 0 & 1 & -1 \\ 
+0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 2 & 2 & 0 & 2 & 0 
+\end{array}\right)
+\to
+\left(\begin{array}{ccccc|c} 
+\circlednum{1} & 1 & 2 & 2 & 1 & 1 \\ 
+0 & \circlednum{2} & 2 & 0 & 2 & 0 \\ 
+0 & 0 & 0 & 0 & \circlednum{1} & -1 \\ 
+0 & 0 & 0 & 0 & 0 & 0 
+\end{array}\right)
+\]
+
+由于形式为 \left(\begin{array}{cccc|c} 0 & 0 & ... & 0 & \alpha \end{array}\right), 
+\(\alpha \neq 0\) 的行从未出现，
+因此系统是一致的。我们还可以观察到，\(b\) 是 \([A|b]\) 中的非基本列，
+因此 rank\([A|b]\) = rank \((A)\)。最后，通过将 \(A\) 完全约化为
+\(E_A\)，可以验证 \(b\) 确实是基本列的组合，\{\(A_{*1}, A_{*2}, A_{*5}\)\}。
+
+% 红色文字
+\textcolor{red}{练习 2.3}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+\begin{enumerate}[leftmargin=*, label=\bfseries 2.3.\arabic*]
+
+\item Determine which of the following systems are consistent.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \(\begin{array}{l}
+    x + 2y + z = 2, \\
+    2x + 4y = 4, \\
+    3x + 6y + z = 4.
+    \end{array}\)
+    
+    \item \(\begin{array}{l}
+    2x + 2y + 4z = 0, \\
+    3x + 2y + 5z = 0, \\
+    4x + 2y + 6z = 0.
+    \end{array}\)
+    
+    \item \(\begin{array}{l}
+    x - y + z = 1, \\
+    x - y - z = 2, \\
+    x + y - z = 3, \\
+    x + y + z = 4.
+    \end{array}\)
+
+    \item \(\begin{array}{l}
+    x - y + z = 1, \\
+    x - y - z = 2, \\
+    x + y - z = 3, \\
+    x + y + z = 2.
+    \end{array}\)
+
+    \item \(\begin{array}{l}
+    2w + x + 3y + 5z = 1, \\
+    4w + 4y + 8z = 0, \\
+    w + x + 2y + 3z = 0, \\
+    x + y + z = 0.
+    \end{array}\)
+
+    \item \(\begin{array}{l}
+    2w + x + 3y + 5z = 7, \\
+    4w + 4y + 8z = 8, \\
+    w + x + 2y + 3z = 5, \\
+    x + y + z = 3.
+    \end{array}\)
+\end{enumerate}
+
+\item Construct a \(3 \times 4\) matrix \(A\) and \(3 \times 1\) columns \(b\) and \(c\) such that \([A|b]\) is the augmented matrix for an inconsistent system, but \([A|c]\) is the augmented matrix for a consistent system.
+
+\item If \(A\) is an \(m \times n\) matrix with rank\((A) = m\), explain why the system \([A|b]\) must be consistent for every right-hand side \(b\).
+
+\item Is it possible for a parabola whose equation has the form \(y = \alpha+\beta x+\gamma x^2\) to pass through the four points (0, 1), (1, 3), (2, 15), and (3, 37)? Why?
+
+\item Consider using floating-point arithmetic (without scaling) to solve the following system:
+\[
+\begin{array}{l}
+.835x + .667y = .168, \\
+.333x + .266y = .067.
+\end{array}
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Is the system consistent when 5-digit arithmetic is used?
+    
+    \item What happens when 6-digit arithmetic is used?
+\end{enumerate}
+
+\item In order to grow a certain crop, it is recommended that each square foot of ground be treated with 10 units of phosphorous, 9 units of potassium, and 19 units of nitrogen. 
+Suppose that there are three brands of fertilizer on the market— say brand \(\mathcal{X}\) , brand \(\mathcal{Y}\) , and brand \(\mathcal{Z}\).
+One pound of brand \(\mathcal{X}\) contains 2 units of phosphorous, 3 units of potassium, and 5 units of nitrogen. One pound of brand \(\mathcal{Y}\) contains 1 unit of phosphorous,
+3 units of potassium, and 4 units of nitrogen. One pound of brand \(\mathcal{Z}\) contains only 1 unit of phosphorous and 1 unit of nitrogen.
+Determine whether or not it is possible to meet exactly the recommendation by applying some combination of the three brands of fertilizer.
+
+\item Suppose that an augmented matrix \([A|b]\) is reduced by means of Gaussian elimination to a row echelon form \([E|c]\). If a row of the form 
+\[
+\left(\begin{array}{cccc|c}
+    0 & 0 & ... & 0 & \alpha
+\end{array}\right), \alpha \neq 0
+\]
+does not appear in \([E|c]\), is it possible that rows of this form could have appeared at earlier stages in the reduction process? Why?
+
+\end{enumerate}

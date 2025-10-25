@@ -1,0 +1,366 @@
+\subsection*{2.4 齐次系统(Homogeneous Systems)}
+
+\(n\) 个未知数的 \(m\) 个线性方程组
+\[
+\begin{array}{cols}
+    a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n = 0, \\
+    a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n = 0, \\
+    \vdots \\
+    a_{m1}x_1 + a_{m2}x_2 + ... + a_{mn}x_n = 0.
+\end{array}
+\]
+
+如果方程式的右侧完全由0组成，则称其为\textbf{齐次系统}。如果方程式的右侧至少有一个非零数，则该系统称为\textbf{非齐次系统}。本节旨在探讨齐次系统的一些基本概念。
+
+在处理齐次方程组时，一致性从来都不是问题，因为无论系数值如何，
+零解 \(x_1 = x_2 = ... = x_n = 0\) 始终是唯一解。下文中，
+将全零组成的解称为\textbf{平凡解}。唯一的问题是：“除了平凡解之外，还有其他解吗？
+如果有，我们如何才能最好地描述它们？” 和之前一样，高斯消元法可以给出答案。
+
+使用高斯消元法将齐次系统的增广矩阵 \([A|0]\) 化简为行阶梯形时，右侧的零列不会被任何三种基本行运算改变。
+也就是说，任何通过行运算从 \([A|0]\) 导出的行阶梯形，也必然具有 \([E|0]\) 的形式。这意味着最后一列的零只是
+多余的负担，没有必要在每一步都带上去。只需将系数矩阵 \(A\) 化简为行阶梯形 \(E\)，并记住在执行回代时，右侧
+完全为零。通过一个典型的例子，可以更好地理解这个过程。
+
+为了求解齐次系统的解
+\[
+\begin{array}{cols}
+    x_1 + 2x_2 + 2x_3 + 3x_4 = 0, \\
+    2x_1 + 4x_2 + x_3 + 3x_4 = 0, \\
+    3x_1 + 6x_2 + x_3 + 4x_4 = 0,
+\end{array}
+\]
+将系数矩阵简化为行阶梯形式。
+\[
+A = 
+\left(\begin{array}{cccc}
+1 & 2 & 2 & 3 \\
+2 & 4 & 1 & 3 \\
+3 & 6 & 1 & 4
+\end{array}\right)\to
+\left(\begin{array}{cccc}
+1 & 2 & 2 & 3 \\
+0 & 0 & -3 & -3 \\
+0 & 0 & -5 & -5
+\end{array}\right)\to
+\left(\begin{array}{cccc}
+1 & 2 & 2 & 3 \\
+0 & 0 & -3 & -3 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+= E
+\]
+因此，原始齐次系统等价于以下简化齐次系统：
+\[
+\begin{array}{cols}
+    x_1 + 2x_2 + 2x_3 + 3x_4 = 0, \\
+    -3x_3 - 3x_4 = 0.
+\end{array}
+\]
+由于这个简化系统中有四个未知数，但只有两个方程，因此不可能为每个未知数求出唯一的解。我们能做的最好的事情是，
+选择两个“基本”未知数——我们称之为\textbf{基本变量}，并用另外两个未知数来求解它们——这两个未知数的值必须
+保持任意或“自由”，因此它们被称为\textbf{自由变量}。虽然选择一组基本变量有多种可能性，但惯例是始终求解与枢轴位置对应的未知数，
+或者，等价地，与基本列对应的未知数。在这个例子中，枢轴（以及基本列）位于第一和第三位置，
+因此策略是应用回代法，用自由变量 \(x_2\) 和 \(x_4\) 来求解简化系统中的基本变量 \(x_1\) 和 \(x_3\)。由第二个方程得出
+\[
+x_3 = -x_4.
+\]
+代入第一个方程可得
+\[
+\begin{align}
+x_1 &= -2x_2 -2x_3 - 3x_4, \\
+&= -2x_2 - 2(-x_4) - 3x_4, \\
+&= -2x_2 - x_4.
+\end{align}
+\]
+因此，原齐次系统的所有解都可以描述为
+\[
+\begin{align}
+    &x_1 = -2x_2 - x_4 \\
+    &x_2 \text{ "free"}, \\
+    &x_3 = -x_4, \\
+    &x_4 \text{ "free"}.
+\end{align}
+\]
+由于自由变量 \(x_2\) 和 \(x_4\) 取值范围涵盖所有可能值，上述表达式描述了所有可能的解。例如，当 \(x_2\) 和 \(x_4\) 取值
+\(x_2\) = 1 且 \(x_4\) = -2 时，则有特定解
+\[
+x_1 = 0, x_2 = 1, x_3 = 2, x_4 = -2
+\]
+将来不再像上述那样描述解集，而是更方便地通过以下方式表达解集: 
+\[
+\left(\begin{array}{cols}
+x_1\\
+x_2\\
+x_3\\
+x_4
+\end{array}\right)=
+\left(\begin{array}{cols}
+-2x_2 - x_4\\
+x_2\\
+-x_4\\
+x_4
+\end{array}\right)=
+x_2\left(\begin{array}{cols}
+-2\\
+1\\
+0\\
+0
+\end{array}\right)+
+x_4\left(\begin{array}{cols}
+-1\\
+0\\
+-1\\
+1
+\end{array}\right)
+\]
+假设 \(x_2\) 和 \(x_4\) 是自由变量，其取值范围为所有可能的数字。这种表示被称为齐次系统的\textbf{通解}。
+通解的表达式强调，每个解都是两个特解的某种组合
+\[
+h_1 = 
+\left(\begin{array}{cols}
+-2\\
+1\\
+0\\
+0
+\end{array}\right),  
+h_2 =
+\left(\begin{array}{cols}
+-1\\
+0\\
+-1\\
+1
+\end{array}\right).
+\]
+\(h_1\) 和 \(h_2\) 显然都是解，因为 \(h_1\) 是在自由变量取值 \(x_2\) = 1 和 \(x_4\) = 0 时生成的，而
+解 \(h_2\) 是在 \(x_2\) = 0 和 \(x_4\) = 1 时生成的。
+
+现在考虑一个由 \(m\) 个线性方程组 \([A|0]\) 组成的广义齐次方程组，
+其中有 \(n\) 个未知数。如果系数矩阵的 rank(\(A\)) = \(r\)，那么
+从前面的讨论中应该可以明显看出，恰好有 \(r\) 个
+基本变量（对应于 \(A\) 中基本列的位置），以及
+恰好有 \(n - r\) 个自由变量（对应于 \(A\) 中非基本列的位置）。
+使用高斯消元法将 \(A\) 化为行阶梯形，
+然后使用回代法根据自由变量求解基本变量，
+即可得到\textbf{通解}，其形式为
+\[
+\mathrm{x} = x_{f_1}\mathrm{h}_1 + x_{f_2}\mathrm{h}_2 + ... + x_{f_{n-r}}\mathrm{h}_{n-r},
+\]
+其中 \(x_{f_1}, x_{f_2}, ..., x_{f_{n-r}}\) 为自由变量，\(h_1, h_2, ..., h_{n-r}\) 为
+\(n \times 1\) 列，表示系统的特定解。由于自由变量 \(x_{f_i}\) 涵盖所有可能值，因此通解会生成所有可能的解。
+
+通解并不依赖于所用的行阶梯形式，因为无论使用哪种行阶梯形式，使用回代法求解基本变量，都会生成一组唯一的特解，
+{\(h_1, h_2, ..., h_{n-r}\)}。无需赘述，我们可以认为这是正确的，因为使用任何行阶梯形式求解基本变量，
+其结果必然与将 \(A\) 完全简化为 \(E_A\)，然后求解简化齐次系统的基本变量，所得结果完全相同。\(E_A\) 的唯一性，保证了 \(h_i\) 的唯一性。
+
+例如，如果与第一个系统相关的系数矩阵 \(A\) 通过高斯-乔丹方法完全简化为 \(E_A\)
+\[
+A = 
+\left(\begin{array}{cccc}
+    1 & 2 & 2 & 3 \\
+    2 & 4 & 1 & 3 \\
+    3 & 6 & 1 & 4 \\
+\end{array}\right)\to
+\left(\begin{array}{cccc}
+    1 & 2 & 0 & 1 \\
+    0 & 0 & 1 & 1 \\
+    0 & 0 & 0 & 0 \\
+\end{array}\right)= E_A
+\]
+然后我们得到以下简化系统：
+\[
+\begin{align}
+    x_1 + 2x_2 + x_4 &= 0, \\
+    x_3 + x_4 &= 0.
+\end{align}
+\]
+用 \(x_2\) 和 \(x_4\) 来求解基本变量 \(x_1\) 和 \(x_3\)，得到的结果与当时的推导给出的结果完全相同，因此也得到了与后续的通解完全相同的结果。
+
+由于避免了回代过程，你可能会发现使用高斯-约当法将 \(A\) 完全简化为 \(E_A\) 更为方便，
+然后直接从 \(E_A\) 中的元素构建通解。这种方法通常会在示例和练习中采用。
+
+如前所述，所有齐次系统都是一致的，因为由全零组成的平凡解始终是唯一解。一个自然而然的问题是：“平凡解何时是唯一解？”
+换句话说，我们想知道齐次系统何时具有唯一解。上述的形式使答案显而易见。只要至少有一个自由变量，那么从上述可以清楚地看出，
+将存在无数个解。因此，当且仅当没有自由变量时，平凡解才是唯一解。
+由于自由变量的数量为 \(n - r\)，其中 \(r\) = rank(\(A\))，因此前面的陈述可以重新表述为：当且仅当 rank(\(A\)) = \(n\)，齐次系统才具有唯一解——平凡解。
+
+% 红色文字
+\textcolor{red}{例子2.4.1}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+齐次系统
+\[
+\begin{align} 
+    x_1 + 2x_2 + 2x_3 = 0, \\
+    2x_1 + 5x_2 + 7x_3 = 0, \\
+    3x_1 + 6x_2 + 8x_3 = 0.
+\end{align}
+\]
+只有平凡解因为
+\[
+A = 
+\left(\begin{array}{ccc}
+    1 & 2 & 2 \\
+    2 & 5 & 7 \\
+    3 & 6 & 8 \\
+\end{array}\right)\to
+\left(\begin{array}{cccc}
+    1 & 2 & 2 \\
+    0 & 1 & 3 \\
+    0 & 0 & 2 \\
+\end{array}\right) = E
+\]
+表明 rank(\(A\)) = \(n\) = 3。事实上，从 \(E\) 中也可以看出，在系统 \([E|0]\) 中应用反向替换只会产生平凡解。
+
+% 红色文字
+\textcolor{red}{例子2.4.2}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+\textbf{问题}: 解释为什么下列齐次系统有无穷多个解，并给出通解：
+\[
+\begin{align} 
+    x_1 + 2x_2 + 2x_3 = 0, \\
+    2x_1 + 5x_2 + 7x_3 = 0, \\
+    3x_1 + 6x_2 + 6x_3 = 0.
+\end{align}
+\]
+\textbf{解答}: 
+\[
+A = 
+\left(\begin{array}{ccc}
+    1 & 2 & 2 \\
+    2 & 5 & 7 \\
+    3 & 6 & 6 \\
+\end{array}\right)\to
+\left(\begin{array}{cccc}
+    1 & 2 & 2 \\
+    0 & 1 & 3 \\
+    0 & 0 & 0 \\
+\end{array}\right) = E
+\]
+表明 rank(\(A\)) = 2 < \(n\) = 3。由于基本列位于位置1 和 2，\(x_1\) 和 \(x_2\) 是基本变量，而 \(x_3\) 是自由变量。使用
+\([E|0]\) 的反向代入，用自由变量来求解基本变量，可得 \(x_2 = -3x_3\) 和 \(x_1 = -2x_2 - 2x_3 = 4x_3\)，因此通解为
+\[
+\left(\begin{array}{c}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+\end{array}\right) = x_3
+\left(\begin{array}{c}
+    4 \\
+    -3 \\
+    1 \\
+\end{array}\right), \text{其中} x_3 \text{是自由变量}.
+\]
+也就是说，每个解都是一个特定解 \(h_1 = \left(\begin{array}{cols} 4 \\-3 \\1\end{array}\right)\) 的倍数
+
+\begin{bluebox}{总结}
+设 \(A_{m \times n}\) 为 \(m\) 个齐次线性方程组的系数矩阵，其中 \(n\) 个未知数，并设 rank(\(A\)) = \(r\)。
+\begin{itemize}
+    \item 与基本列的位置（即枢轴位置）相对应的未知数称为\textbf{基本变量}，与非基本列的位置相对应的未知数称为\textbf{自由变量}。
+    \item 恰好有 \(r\) 个基本变量和 \(n-r\) 个自由变量。
+    \item 为了描述所有解，使用高斯消元法将 \(A\) 化为行阶梯形式，然后使用回代法求解，以自由变量的形式表示基本变量。这样就得到了通解，其形式为
+    \[
+    \mathrm{x} = x_{f_1}\mathrm{h}_1 + x_{f_2}\mathrm{h}_2 + ... + x_{f_{n-r}}\mathrm{h}_{n-r},
+    \]
+    其中 \(x_{f_1}, x_{f_2}, ..., x_{f_{n-r}}\) 为自由变量，\(h_1, h_2, ..., h_{n-r}\) 为 \(n \times 1\) 列，表示齐次方程组的特解。\(h_i\) 与回代过程中使用的
+    行阶梯形式无关。由于自由变量 \(x_{f_i}\) 涵盖所有可能值，因此通解会生成所有可能的解。
+    \item 一个齐次系统拥有唯一解（平凡解），当且仅当 rank(\(A\)) = \(n\) ——即当且仅当不存在自由变量。
+\end{itemize}
+\end{bluebox}
+
+
+% 红色文字
+\textcolor{red}{练习 2.4}
+% 红色水平线（宽度为文本宽度，厚度0.4pt）
+\color{red}\rule{\textwidth}{0.4pt}\color{black}
+
+\begin{enumerate}[leftmargin=*, label=\bfseries 2.4.\arabic*]
+
+\item Determine the general solution for each of the following homogeneous systems.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \(\begin{array}{l}
+    x_1 + 2x_2 + x_3 + 2x_4 = 0, \\
+    2x_1 + 4x_2 + x_3 + 3x_4 = 0, \\
+    3x_1 + 6x_2 + x_3 + 4x_4 = 0.
+    \end{array}\)
+    
+    \item \(\begin{array}{l}
+    2x + y + z = 0, \\
+    4x + 2y + z = 0, \\
+    6x + 3y + z = 0, \\
+    8x + 4y + z = 0.
+    \end{array}\)
+    
+    \item \(\begin{array}{l}
+    x_1 + x_2 + 2x_3 = 0, \\
+    3x_1 + 3x_3 + 3x_4 = 0, \\
+    2x_1 + x_2 + 3x_3 + x_4 = 0. \\
+    x_1 + 2x_2 + 3x_3 - x_4 = 0,
+    \end{array}\)
+
+    \item \(\begin{array}{l}
+    2x + y + z = 0, \\
+    4x + 2y + z = 0, \\
+    6x + 3y + z = 0, \\
+    8x + 5y + z = 0.
+    \end{array}\)
+\end{enumerate}
+
+\item Among all solutions that satisfy the homogeneous system
+\[
+\begin{align}
+x + 2y + z &= 0, \\
+2x + 4y + z &= 0, \\
+x + 2y - z &=0.
+\end{align}
+\]
+determine those that also satisfy the nonlinear constraint \(y - xy = 2z\).
+
+\item Consider a homogeneous system whose coefficient matrix is
+\[
+A = \left(\begin{array}{ccccc}
+    1 & 2 & 1 & 3 & 1 \\
+    2 & 4 & -1 & 3 & 8 \\
+    1 & 2 & 3 & 5 & 7 \\
+    2 & 4 & 2 & 6 & 2 \\
+    3 & 6 & 1 & 7 & -3
+\end{array}\right).
+\]
+First transform \(A\) to an unreduced row echelon form to determine the
+general solution of the associated homogeneous system. Then reduce \(A\)
+to \(E_A\), and show that the same general solution is produced.
+
+\item If \(A\) is the coefficient matrix for a homogeneous system consisting of four equations in eight unknowns and if there are five free variables, what is rank(\(A\))?
+
+\item Suppose that \(A\) is the coefficient matrix for a homogeneous system of four equations in six unknowns and suppose that \(A\) has at least one nonzero row.
+\begin{enumerate}[label=(\alph*)]
+    \item Determine the fewest number of free variables that are possible.
+    \item Determine the maximum number of free variables that are possible.
+\end{enumerate}
+
+\item Explain why a homogeneous system of \(m\) equations in \(n\) unknowns where \(m < n\) must always possess an infinite number of solutions.
+
+\item Construct a homogeneous system of three equations in four unknowns that has
+\[
+x_2\left(\begin{array}{cols}
+    -2 \\
+    1 \\
+    0 \\
+    0
+\end{array}\right)+
+x_4\left(\begin{array}{cols}
+    -1 \\
+    0 \\
+    -1 \\
+    1
+\end{array}\right)
+\]
+as its general solution.
+
+\item If \(c_1\) and \(c_2\) are columns that represent two particular solutions of the same homogeneous system, explain why the sum \(c_1 + c_2\) must also represent a solution of this system.
+
+\end{enumerate}
